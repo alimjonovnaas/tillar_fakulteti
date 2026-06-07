@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tillar fakulteti · 2025–2026 hisobot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --ink:#0C1A33;
+    --ink-2:#13294B;
+    --ink-3:#1E3A66;
+    --paper:#F7F5EF;
+    --paper-2:#FFFFFF;
+    --gold:#C2902E;
+    --gold-2:#E0B45A;
+    --teal:#1E6F6A;
+    --terra:#A6492F;
+    --slate:#5A7290;
+    --line:rgba(12,26,51,.12);
+    --muted:#5C6B82;
+    --shadow:0 18px 50px -22px rgba(12,26,51,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:#fff}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.7rem clamp(1rem,4vw,3rem);
+    background:rgba(247,245,239,.82);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:.7rem;font-weight:800;letter-spacing:.02em}
+  .crest{
+    width:34px;height:34px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 30% 30%,var(--ink-3),var(--ink));
+    display:grid;place-items:center;color:var(--gold-2);
+    font-family:'Fraunces',serif;font-weight:900;font-size:1rem;
+    box-shadow:inset 0 0 0 2px var(--gold);
+  }
+  .brand small{display:block;font-weight:600;font-size:.62rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .navlinks{display:flex;gap:.3rem;flex-wrap:wrap}
+  .navlinks a{
+    text-decoration:none;color:var(--ink-2);font-weight:600;font-size:.84rem;
+    padding:.4rem .7rem;border-radius:99px;transition:.25s;
+  }
+  .navlinks a:hover{background:var(--ink);color:var(--gold-2)}
+  @media(max-width:780px){.navlinks{display:none}}
+
+  /* ---------- HERO ---------- */
+  header{
+    position:relative;
+    background:
+      radial-gradient(1200px 600px at 85% -10%,rgba(194,144,46,.18),transparent 60%),
+      radial-gradient(900px 500px at 0% 110%,rgba(30,111,106,.20),transparent 60%),
+      linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 60%,#0A1730 100%);
+    color:#EBEEF5;
+    padding:clamp(3.5rem,9vw,7rem) clamp(1.2rem,5vw,3rem) clamp(3rem,6vw,5rem);
+    overflow:hidden;
+  }
+  header::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:46px 46px;opacity:.06;
+    -webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%);
+            mask-image:radial-gradient(circle at 50% 30%,#000,transparent 75%);
+  }
+  .hero-inner{position:relative;max-width:1180px;margin:0 auto}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+    color:var(--gold-2);border:1px solid rgba(224,180,90,.4);
+    padding:.4rem .9rem;border-radius:99px;margin-bottom:1.5rem;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold-2);box-shadow:0 0 0 4px rgba(224,180,90,.2)}
+  h1{
+    font-family:'Fraunces',serif;font-weight:900;
+    font-size:clamp(2.2rem,6.5vw,4.6rem);line-height:1.02;letter-spacing:-.01em;
+    max-width:16ch;
+  }
+  h1 em{font-style:italic;color:var(--gold-2)}
+  .hero-sub{margin-top:1.3rem;max-width:54ch;color:#B9C4D6;font-size:clamp(1rem,2vw,1.18rem)}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:1.8rem;font-size:.85rem;color:#9FB0C9}
+  .hero-meta b{color:#EBEEF5;font-weight:700}
+
+  .hero-stats{
+    position:relative;display:grid;gap:1px;margin-top:3rem;
+    grid-template-columns:repeat(4,1fr);
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;overflow:hidden;
+  }
+  .hstat{background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);padding:1.4rem 1.3rem}
+  .hstat .num{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(1.8rem,4.5vw,2.9rem);color:#fff;line-height:1}
+  .hstat .lab{margin-top:.45rem;font-size:.78rem;color:#A9B7CC;font-weight:600;letter-spacing:.02em}
+  @media(max-width:720px){.hero-stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:clamp(3rem,7vw,5.5rem) clamp(1.2rem,5vw,3rem);max-width:1240px;margin:0 auto}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:2.2rem;flex-wrap:wrap}
+  .sec-tag{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:.6rem}
+  .sec-tag::before{content:"";width:26px;height:2px;background:var(--gold)}
+  h2{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.05;margin-top:.5rem;letter-spacing:-.01em;max-width:18ch}
+  .sec-note{color:var(--muted);font-size:.92rem;max-width:34ch}
+
+  /* ---------- STAT CARDS ---------- */
+  .grid{display:grid;gap:1rem}
+  .g-auto{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+  .card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.4rem 1.5rem;
+    position:relative;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s;
+  }
+  .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(194,144,46,.5)}
+  .card .icn{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;margin-bottom:.9rem;
+    background:linear-gradient(135deg,var(--ink-3),var(--ink));color:var(--gold-2)}
+  .card .icn svg{width:20px;height:20px}
+  .stat .v{font-family:'Fraunces',serif;font-weight:800;font-size:2.1rem;line-height:1;color:var(--ink)}
+  .stat .v .sub{font-size:1rem;color:var(--slate);font-weight:600}
+  .stat .k{margin-top:.5rem;font-size:.82rem;color:var(--muted);font-weight:600}
+  .stat.accent{background:linear-gradient(165deg,var(--ink),var(--ink-2));color:#fff;border-color:transparent}
+  .stat.accent .v{color:#fff}.stat.accent .k{color:#AEBDD3}.stat.accent .icn{background:rgba(255,255,255,.1)}
+
+  /* ---------- CHART CARDS ---------- */
+  .charts{display:grid;gap:1.2rem;grid-template-columns:repeat(2,1fr)}
+  @media(max-width:860px){.charts{grid-template-columns:1fr}}
+  .chart-card{background:var(--paper-2);border:1px solid var(--line);border-radius:18px;padding:1.5rem 1.5rem 1.2rem;box-shadow:0 8px 30px -24px rgba(12,26,51,.4)}
+  .chart-card h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;color:var(--ink)}
+  .chart-card .ch-sub{color:var(--muted);font-size:.82rem;margin:.2rem 0 1rem}
+  .ch-wrap{position:relative;height:260px}
+  .span2{grid-column:1/-1}
+
+  /* ---------- TABLE ---------- */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--paper-2)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:.9rem}
+  th,td{padding:.85rem 1.1rem;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{background:var(--ink);color:#EBEEF5;font-weight:700;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+  td.num,th.num{text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+  tbody tr{transition:background .2s}
+  tbody tr:hover{background:rgba(194,144,46,.07)}
+  tbody tr:last-child{font-weight:800;background:rgba(12,26,51,.04)}
+  tbody tr:last-child td{border-bottom:none}
+
+  /* ---------- PARTNERS ---------- */
+  .partners{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
+  @media(max-width:760px){.partners{grid-template-columns:1fr}}
+  .pcard{background:var(--paper-2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:1.3rem 1.4rem;transition:.3s}
+  .pcard:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+  .pcard h4{font-family:'Fraunces',serif;font-weight:600;font-size:1.08rem;color:var(--ink);display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem}
+  .flag{width:30px;height:21px;border-radius:4px;flex:none;box-shadow:0 1px 4px rgba(0,0,0,.18);overflow:hidden;display:flex;flex-direction:column}
+  .plist{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+  .plist li{font-size:.86rem;color:var(--ink-2);padding-left:1rem;position:relative}
+  .plist li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--teal)}
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .ach{display:grid;gap:.9rem;grid-template-columns:repeat(2,1fr)}
+  @media(max-width:760px){.ach{grid-template-columns:1fr}}
+  .achit{display:flex;gap:1rem;align-items:flex-start;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;transition:.3s}
+  .achit:hover{border-color:var(--gold);box-shadow:var(--shadow)}
+  .achit .n{font-family:'Fraunces',serif;font-weight:900;font-size:1.5rem;color:var(--gold);line-height:1;flex:none;width:2.2rem}
+  .achit p{font-size:.92rem;color:var(--ink-2)}
+  .achit p b{color:var(--ink)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  footer{background:var(--ink);color:#9FB0C9;padding:2.6rem clamp(1.2rem,5vw,3rem);text-align:center;margin-top:2rem}
+  footer .brand{justify-content:center;color:#EBEEF5}
+  footer p{font-size:.82rem;margin-top:1rem;max-width:60ch;margin-inline:auto}
+  .sec-alt{background:linear-gradient(180deg,rgba(12,26,51,.035),transparent);max-width:none;width:100%}
+  .sec-alt > div{max-width:1240px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <div class="crest">T</div>
+    <div>TDPI · Tillar fakulteti<small>Termiz Davlat Pedagogika Instituti</small></div>
+  </div>
+  <div class="navlinks">
+    <a href="#umumiy">Umumiy</a>
+    <a href="#ilmiy">Ilmiy-tadqiqot</a>
+    <a href="#oquv">O‘quv-uslubiy</a>
+    <a href="#diagrammalar">Tahlil</a>
+    <a href="#biriktirish">Talabalar</a>
+    <a href="#hamkorlik">Hamkorlik</a>
+    <a href="#yutuqlar">Yutuqlar</a>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="dot"></span>2025–2026 o‘quv yili hisoboti</span>
+    <h1>Tillar fakulteti <em>bir yilda</em> nimalarga erishdi</h1>
+    <p class="hero-sub">Termiz Davlat Pedagogika Instituti Tillar fakultetining o‘quv yili davomida amalga oshirgan ilmiy, o‘quv-uslubiy va ma’naviy-ma’rifiy ishlari bo‘yicha yaxlit interaktiv hisobot.</p>
+    <div class="hero-meta">
+      <span><b>4</b> ta kafedra</span>
+      <span><b>78</b> professor-o‘qituvchi</span>
+      <span><b>2 056</b> talaba</span>
+      <span><b>34</b> xorijiy hamkor</span>
+    </div>
+
+    <div class="hero-stats reveal">
+      <div class="hstat"><div class="num" data-count="1886">0</div><div class="lab">Bakalavr talabalari</div></div>
+      <div class="hstat"><div class="num" data-count="170">0</div><div class="lab">Magistratura talabalari</div></div>
+      <div class="hstat"><div class="num" data-count="691">0</div><div class="lab">Talaba bilan maqola</div></div>
+      <div class="hstat"><div class="num" data-count="940">0</div><div class="lab">To‘garaklarda talaba</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== UMUMIY ===== -->
+<section id="umumiy">
+  <div class="sec-head reveal">
+    <div>
+      <span class="sec-tag">Kontingent</span>
+      <h2>Fakultetning umumiy salohiyati</h2>
+    </div>
+    <p class="sec-note">Professor-o‘qituvchilar tarkibi va talabalar kontingenti bo‘yicha asosiy ko‘rsatkichlar.</p>
+  </div>
+
+  <div class="grid g-auto reveal">
+    <div class="card stat accent">
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div>
+      <div class="v"><span data-count="4">0</span></div><div class="k">Kafedra</div>
+    </div>
+    <div class="card stat">
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="v"><span data-count="78">0</span></div><div class="k">Professor-o‘qituvchi</div>
+    </div>
+    <div class="card stat">
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <div class="v"><span data-count="17">0</span></div><div class="k">Ilmiy salohiyatli o‘qituvchi</div>
+    </div>
+    <div class="card stat">
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
+      <div class="v"><span data-count="1886">0</span></div><div class="k">Bakalavr talabasi</div>
+    </div>
+    <div class="card stat">
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+      <div class="v"><span data-count="170">0</span></div><div class="k">Magistratura talabasi</div>
+    </div>
+    <div class="card stat">
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <div class="v"><span data-count="940">0</span></div><div class="k">To‘garaklarda qatnashgan talaba</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ILMIY ===== -->
+<section id="ilmiy">
+  <div class="sec-head reveal">
+    <div>
+      <span class="sec-tag">Ilmiy-tadqiqot ishlari</span>
+      <h2>Natijalar va ilmiy mahsulot</h2>
+    </div>
+    <p class="sec-note">Nashrlar, indekslar, loyihalar va xo‘jalik shartnomalari bo‘yicha yillik natijalar.</p>
+  </div>
+
+  <div class="grid g-auto reveal" id="research-grid"></div>
+</section>
+
+<!-- ===== O'QUV-USLUBIY + USTOZ-SHOGIRD ===== -->
+<section id="oquv" class="sec-alt"><div>
+  <div class="sec-head reveal">
+    <div>
+      <span class="sec-tag">O‘quv-uslubiy & Ustoz-shogird</span>
+      <h2>O‘quv jarayoni va tarbiyaviy ishlar</h2>
+    </div>
+    <p class="sec-note">2025–2026 o‘quv-uslubiy faoliyati hamda ustoz-shogird ishlari ko‘rsatkichlari.</p>
+  </div>
+  <div class="grid g-auto reveal" id="teaching-grid"></div>
+</div></section>
+
+<!-- ===== DIAGRAMMALAR ===== -->
+<section id="diagrammalar">
+  <div class="sec-head reveal">
+    <div>
+      <span class="sec-tag">Tahliliy ko‘rsatkichlar</span>
+      <h2>Raqamlar ortidagi manzara</h2>
+    </div>
+    <p class="sec-note">Kafedralar kesimida salohiyat, bajarilgan soatlar, sertifikatlar va to‘garaklar bo‘yicha taqqoslama.</p>
+  </div>
+
+  <div class="charts reveal">
+    <div class="chart-card">
+      <h3>Talabalar kontingenti</h3>
+      <p class="ch-sub">Ta’lim bosqichlari bo‘yicha taqsimot</p>
+      <div class="ch-wrap"><canvas id="chStudents"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Ilmiy salohiyat</h3>
+      <p class="ch-sub">Kafedralar kesimida ilmiy salohiyatli o‘qituvchilar soni</p>
+      <div class="ch-wrap"><canvas id="chPotential"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Bajarilgan o‘quv soatlari</h3>
+      <p class="ch-sub">Reja va amaldagi yuklama, kafedralar bo‘yicha · Jami 74 877 soat</p>
+      <div class="ch-wrap"><canvas id="chHours"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Til sertifikatiga ega talabalar</h3>
+      <p class="ch-sub">Milliy yoki xalqaro darajadagi sertifikat, %</p>
+      <div class="ch-wrap"><canvas id="chCert"></canvas></div>
+    </div>
+    <div class="chart-card span2">
+      <h3>To‘garaklarda qatnashgan talabalar</h3>
+      <p class="ch-sub">Yo‘nalishlar bo‘yicha ishtirokchilar soni</p>
+      <div class="ch-wrap"><canvas id="chClubs"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BIRIKTIRISH ===== -->
+<section id="biriktirish" class="sec-alt"><div>
+  <div class="sec-head reveal">
+    <div>
+      <span class="sec-tag">Amaliyot</span>
+      <h2>Talabalarni ta’lim muassasalariga biriktirish</h2>
+    </div>
+    <p class="sec-note">3 va 4-kurs talabalarining yo‘nalishlar kesimida umumta’lim muassasalariga biriktirilishi.</p>
+  </div>
+  <div class="tbl-wrap reveal">
+    <table>
+      <thead>
+        <tr><th>Yo‘nalish / Kurs</th><th class="num">3-kurs</th><th class="num">4-kurs</th><th class="num">Jami</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Xorijiy til va adabiyoti (ingliz tili)</td><td class="num">174</td><td class="num">258</td><td class="num">432</td></tr>
+        <tr><td>Maktabgacha va boshlang‘ich ta’limda xorijiy til (ingliz tili)</td><td class="num">70</td><td class="num">99</td><td class="num">169</td></tr>
+        <tr><td>O‘zga til guruhlarda rus tili</td><td class="num">122</td><td class="num">191</td><td class="num">313</td></tr>
+        <tr><td>O‘zbek tili va adabiyoti</td><td class="num">160</td><td class="num">93</td><td class="num">253</td></tr>
+        <tr><td>Xorijiy til va adabiyoti (nemis tili)</td><td class="num">34</td><td class="num">20</td><td class="num">54</td></tr>
+        <tr><td>Jami</td><td class="num">560</td><td class="num">661</td><td class="num">1221</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- ===== HAMKORLIK ===== -->
+<section id="hamkorlik">
+  <div class="sec-head reveal">
+    <div>
+      <span class="sec-tag">Xalqaro hamkorlik</span>
+      <h2>Dunyo bo‘ylab sheriklar</h2>
+    </div>
+    <p class="sec-note">Kafedralarning xorijiy universitet va tashkilotlar bilan hamkorligi.</p>
+  </div>
+  <div class="partners reveal">
+    <div class="pcard">
+      <h4><span class="flag" id="flag-uz"></span>O‘zbek tili va adabiyoti</h4>
+      <ul class="plist"><li>Tojikiston</li><li>Turkiya</li></ul>
+    </div>
+    <div class="pcard">
+      <h4><span class="flag" id="flag-de"></span>Gumanitar yo‘nalishlarda xorijiy tillar</h4>
+      <ul class="plist"><li>SES, Goethe-Institut</li><li>Universität Münster</li><li>IDS, Mannheim</li><li>PH Heidelberg</li></ul>
+    </div>
+    <div class="pcard">
+      <h4><span class="flag" id="flag-ru"></span>Rus tili va adabiyoti</h4>
+      <ul class="plist"><li>Sankt-Peterburg davlat universiteti</li><li>Qozon Federal Universiteti</li><li>Volgograd davlat ijtimoiy-pedagogika universiteti</li></ul>
+    </div>
+    <div class="pcard">
+      <h4><span class="flag" id="flag-gb"></span>Amaliy ingliz tili</h4>
+      <ul class="plist"><li>British Council (Buyuk Britaniya)</li><li>European International University (Fransiya)</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== YUTUQLAR ===== -->
+<section id="yutuqlar" class="sec-alt"><div>
+  <div class="sec-head reveal">
+    <div>
+      <span class="sec-tag">Yutuqlar va natijalar</span>
+      <h2>O‘quv yili davomida erishilganlar</h2>
+    </div>
+    <p class="sec-note">Talabalar va o‘qituvchilarning eng yorqin natijalari.</p>
+  </div>
+  <div class="ach reveal">
+    <div class="achit"><span class="n">70%</span><p>4-kurs talabalarining <b>70 foizi</b> ish bilan ta’minlandi.</p></div>
+    <div class="achit"><span class="n">40%</span><p>2–3 kurs talabalarining <b>40 foizi</b> norasmiy o‘quv markazlarida ish bilan ta’minlandi.</p></div>
+    <div class="achit"><span class="n">3</span><p><b>3 nafar talaba</b> davlat nomdor stipendiyalarini qo‘lga kiritdi.</p></div>
+    <div class="achit"><span class="n">4</span><p><b>4 nafar talaba</b> Rektor stipendiyasini qo‘lga kiritdi.</p></div>
+    <div class="achit"><span class="n">II</span><p>Innoweek-2026 institut bosqichi <b>“Kelajak muhandislari”</b> yo‘nalishi bo‘yicha 2-o‘rin.</p></div>
+    <div class="achit"><span class="n">5</span><p>AQSh, Kanada, Rossiya, Ozarbayjon va Tojikistondan kelgan professorlar seminar o‘tkazdi.</p></div>
+    <div class="achit"><span class="n">1</span><p><b>1 nafar o‘qituvchi</b> ERASMUS dasturi g‘olibi bo‘ldi.</p></div>
+    <div class="achit"><span class="n">$99K</span><p>O‘quv yili davomida fakultetga <b>99 937 dollar</b> investitsiya jalb qilindi.</p></div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="brand"><div class="crest">T</div><div>Tillar fakulteti<small>Termiz Davlat Pedagogika Instituti</small></div></div>
+  <p>2025–2026 o‘quv yili davomida qilingan ishlar hisoboti. Barcha ko‘rsatkichlar fakultetning yillik tahliliy ma’lumotlari asosida tayyorlangan.</p>
+</footer>
+
+<script>
+/* ---------- DATA ---------- */
+const research = [
+  {k:"Google Scholar h-indeksi", v:312},
+  {k:"OAK jurnali (xorijiy / mahalliy)", v:"350 / 250"},
+  {k:"Patent / DGU", v:"0 / 69"},
+  {k:"Xalqaro / respublika konferensiya", v:"91 / 69"},
+  {k:"ORCID raqami", v:77},
+  {k:"Til sertifikati", v:57},
+  {k:"PhD / DSc", v:17},
+  {k:"Xorijiy / mahalliy hamkorlar", v:"31 / 25"},
+  {k:"Monografiya", v:25},
+  {k:"Mahalliy / xorijiy loyihalar", v:"24 / 3"},
+  {k:"Jurnal tahrir a’zoligi", v:20},
+  {k:"Dotsent", v:8},
+  {k:"SCOPUS / Web of Science maqola", v:7},
+  {k:"SCOPUS h-indeksi", v:1},
+  {k:"Xo‘jalik shartnoma (so‘m)", v:"103 412 000"},
+  {k:"Jalb qilingan investitsiya", v:"$99 937"},
+];
+const teaching = [
+  {g:"O‘quv-uslubiy · 2025–2026", k:"Dars tahlili", v:853},
+  {g:"O‘quv-uslubiy · 2025–2026", k:"Video dars", v:352},
+  {g:"O‘quv-uslubiy · 2025–2026", k:"TM bilan hamkorlik", v:256},
+  {g:"O‘quv-uslubiy · 2025–2026", k:"Ochiq dars", v:120},
+  {g:"O‘quv-uslubiy · 2025–2026", k:"Malaka oshirish", v:35},
+  {g:"O‘quv-uslubiy · 2025–2026", k:"O‘quv qo‘llanma", v:20},
+  {g:"O‘quv-uslubiy · 2025–2026", k:"Darslik", v:8},
+  {g:"O‘quv-uslubiy · 2025–2026", k:"Metodik / uslubiy qo‘llanma", v:6},
+  {g:"Ustoz-shogird · 2025–2026", k:"Talaba bilan maqola", v:691},
+  {g:"Ustoz-shogird · 2025–2026", k:"Ma’naviy-ma’rifiy tadbirlar", v:366},
+  {g:"Ustoz-shogird · 2025–2026", k:"OAV va ijtimoiy tarmoqlar", v:120},
+  {g:"Ustoz-shogird · 2025–2026", k:"Tanlov va musobaqalar", v:103},
+];
+
+/* ---------- BUILD STAT CARDS ---------- */
+function escapeNum(v){return String(v).replace(/[<>&]/g,'')}
+const rg = document.getElementById('research-grid');
+research.forEach(r=>{
+  const isNum = typeof r.v === 'number';
+  rg.insertAdjacentHTML('beforeend',
+    `<div class="card stat">
+       <div class="v">${isNum?`<span data-count="${r.v}">0</span>`:`<span class="big">${escapeNum(r.v)}</span>`}</div>
+       <div class="k">${r.k}</div>
+     </div>`);
+});
+const tg = document.getElementById('teaching-grid');
+let curGroup=null;
+teaching.forEach(t=>{
+  tg.insertAdjacentHTML('beforeend',
+    `<div class="card stat${t.g.startsWith('Ustoz')?' accent':''}">
+       <div class="v"><span data-count="${t.v}">0</span></div>
+       <div class="k">${t.k}<br><span style="font-size:.7rem;opacity:.65;font-weight:600">${t.g}</span></div>
+     </div>`);
+});
+
+/* ---------- FLAGS ---------- */
+document.getElementById('flag-de').style.background='linear-gradient(#000 33%,#D00 33% 66%,#FFCE00 66%)';
+document.getElementById('flag-ru').style.background='linear-gradient(#fff 33%,#0039A6 33% 66%,#D52B1E 66%)';
+const gb=document.getElementById('flag-gb');
+gb.style.background='#012169';
+gb.innerHTML='<svg viewBox="0 0 60 42" style="width:100%;height:100%"><rect width="60" height="42" fill="#012169"/><path d="M0,0 60,42 M60,0 0,42" stroke="#fff" stroke-width="8"/><path d="M0,0 60,42 M60,0 0,42" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V42 M0,21 H60" stroke="#fff" stroke-width="12"/><path d="M30,0 V42 M0,21 H60" stroke="#C8102E" stroke-width="6"/></svg>';
+
+const uz=document.getElementById('flag-uz');
+uz.innerHTML='<svg viewBox="0 0 60 42" style="width:100%;height:100%">'
+ +'<rect width="60" height="42" fill="#0099B5"/>'
+ +'<rect y="14.5" width="60" height="13" fill="#fff"/>'
+ +'<rect y="28.5" width="60" height="13.5" fill="#1EB53A"/>'
+ +'<rect y="14" width="60" height="0.6" fill="#CE1126"/>'
+ +'<rect y="27.9" width="60" height="0.6" fill="#CE1126"/>'
+ +'<circle cx="12" cy="7.2" r="4.2" fill="#fff"/>'
+ +'<circle cx="13.7" cy="7.2" r="4.2" fill="#0099B5"/>'
+ +'<g fill="#fff">'
+ +'<circle cx="19" cy="3.4" r="0.7"/><circle cx="22.5" cy="3.4" r="0.7"/><circle cx="26" cy="3.4" r="0.7"/>'
+ +'<circle cx="19" cy="6.6" r="0.7"/><circle cx="22.5" cy="6.6" r="0.7"/><circle cx="26" cy="6.6" r="0.7"/>'
+ +'<circle cx="19" cy="9.8" r="0.7"/><circle cx="22.5" cy="9.8" r="0.7"/><circle cx="26" cy="9.8" r="0.7"/>'
+ +'</g></svg>';
+
+/* ---------- COUNT-UP ---------- */
+function countUp(el){
+  const target = +el.dataset.count;
+  const dur = 1400, t0 = performance.now();
+  const fmt = n => n.toLocaleString('ru-RU').replace(/\u00A0/g,' ');
+  function tick(now){
+    const p = Math.min((now-t0)/dur,1);
+    const e = 1-Math.pow(1-p,3);
+    el.textContent = fmt(Math.round(target*e));
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ---------- CHARTS ---------- */
+const C={ink:'#0C1A33',ink2:'#13294B',gold:'#C2902E',gold2:'#E0B45A',teal:'#1E6F6A',terra:'#A6492F',slate:'#5A7290'};
+Chart.defaults.font.family="'Manrope',sans-serif";
+Chart.defaults.color='#5C6B82';
+Chart.defaults.font.size=12;
+let chartsDone=false;
+function buildCharts(){
+  if(chartsDone)return; chartsDone=true;
+  const grid={color:'rgba(12,26,51,.07)'};
+  const noGrid={display:false};
+
+  new Chart(chStudents,{type:'doughnut',data:{labels:['Bakalavr','Magistratura'],
+    datasets:[{data:[1886,170],backgroundColor:[C.ink2,C.gold],borderWidth:0,hoverOffset:8}]},
+    options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:16}}}}});
+
+  new Chart(chPotential,{type:'bar',data:{labels:['O‘zbek tili va adabiyoti','Amaliy ingliz tili','Rus tili va adabiyoti','Gumanitar yo‘n. xorijiy tillar'],
+    datasets:[{label:'Ilmiy salohiyatli o‘qituvchi',data:[8,4,3,2],backgroundColor:C.teal,borderRadius:6,maxBarThickness:46}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid,ticks:{precision:0}},y:{grid:noGrid}}}});
+
+  new Chart(chHours,{type:'bar',data:{labels:['O‘zbek tili va adabiyoti','Amaliy ingliz tili','Rus tili va adabiyoti','Gumanitar yo‘n. xorijiy tillar'],
+    datasets:[
+      {label:'Rejada',data:[18038,21213,19848,15778],backgroundColor:C.slate,borderRadius:5,maxBarThickness:28},
+      {label:'Amalda',data:[18038,21213,19848,15778],backgroundColor:C.gold,borderRadius:5,maxBarThickness:28}
+    ]},
+    options:{plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:16}}},scales:{x:{grid:noGrid},y:{grid,beginAtZero:true}}}});
+
+  new Chart(chCert,{type:'bar',data:{labels:['Ingliz tili','Nemis tili','Rus tili'],
+    datasets:[{label:'Sertifikatga ega, %',data:[85,50,30],backgroundColor:[C.ink2,C.gold,C.terra],borderRadius:6,maxBarThickness:60}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'%'}}},
+      scales:{y:{grid,beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}},x:{grid:noGrid}}}});
+
+  new Chart(chClubs,{type:'bar',data:{labels:['Til','Fan','Ilmiy','Ijodiy','Sport'],
+    datasets:[{label:'Ishtirokchilar',data:[229,189,150,60,15],
+      backgroundColor:[C.ink2,C.teal,C.gold,C.terra,C.slate],borderRadius:7,maxBarThickness:80}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{grid,beginAtZero:true},x:{grid:noGrid}}}});
+}
+
+/* ---------- OBSERVERS ---------- */
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.18});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const chartIO=new IntersectionObserver((es)=>{
+  if(es.some(e=>e.isIntersecting)){buildCharts();chartIO.disconnect();}
+},{threshold:.15});
+chartIO.observe(document.getElementById('diagrammalar'));
+
+/* hero counters fire immediately */
+document.querySelectorAll('.hero-stats [data-count]').forEach(countUp);
+</script>
+</body>
+</html>
