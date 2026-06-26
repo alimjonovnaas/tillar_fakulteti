@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /conference-proceedings.pdf
+
+# Encourage indexing of the PDF document
+User-agent: Googlebot
+Allow: /
+Allow: /conference-proceedings.pdf
+
+User-agent: Bingbot
+Allow: /
+Allow: /conference-proceedings.pdf
+
+Sitemap: https://example.com/sitemap.xml
